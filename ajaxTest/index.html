@@ -1,0 +1,55 @@
+<html>
+<head>
+<script src='js/jquery-1.11.3.min.js' > </script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var hostname = getQueryString("hostname") ;
+
+    var pathname = window.location.pathname ;
+   // alert("pathname: "+ pathname) ;
+    
+    var newUrl = "http://"+ hostname + pathname;
+    //var newUrl = "http://www.163.com";
+    //alert("newUrl:  " + newUrl) ;
+    var xmlhttp;
+    if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    }
+    else{// code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function(){
+        //alert("readyState:" + xmlhttp.readyState) ;
+        if (xmlhttp.readyState==4 /*&& xmlhttp.status==200*/){
+            //if(xmlhttp.status == 302){
+            //document.getElementById("myDiv").innerHTML = xmlhttp.responseText ;
+            //}
+           
+        var text = "request url is " + newUrl +" Http Status: " + xmlhttp.status ; 
+        
+        document.getElementById("myDiv").innerHTML=text ;/*xmlhttp.responseText*/;
+       // document.getElementById("myDiv").innerHTML +="text:"+ xmlhttp.responseText ;
+        }
+    }
+    xmlhttp.open("GET",newUrl,true);
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.send();
+
+})
+
+function getQueryString(name) { 
+var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+var r = window.location.search.substr(1).match(reg); 
+if (r != null) return unescape(r[2]); return null; 
+}
+
+</script>
+</head>
+<body>
+
+<h2>AJAX</h2>
+<button type="button" >请求数据</button>
+<div id="myDiv"></div>
+
+</body>
+</html>

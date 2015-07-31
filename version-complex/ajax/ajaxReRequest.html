@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>jQuery 301 Trial</title>
+  <script src='../js/jquery-1.11.3.min.js' ></script>
+
+  <script type="text/javascript">
+  function get_resp_status(url) {
+    $.ajax({
+      url: url,
+      complete: function (jqxhr, txt_status) {
+        console.log ("Complete: [ " + txt_status + " ] " + jqxhr);
+        // if (response code is 301) {
+        console.log ("Location: " + jqxhr.getResponseHeader("Location"));
+        // }
+      }
+    });
+  }
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('a').mouseenter(
+      function () {
+        get_resp_status(this.href);
+      },
+      function () {
+      }
+    );
+  });
+  </script>
+</head>
+<body>
+  <a href="http://www.baidu.com">Test 301 redirect</a>
+  <a href="http://cnn.com/not_found">Test 404 not found</a>
+  <p id="result"></p>
+</body>
+</html>

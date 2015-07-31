@@ -1,0 +1,49 @@
+<!doctype html> 
+<html> 
+<head> 
+<title>ajax.html</title> 
+<meta content="IE=8" http-equiv="X-UA-Compatible"/> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+
+<script src='../js/jquery-1.11.3.min.js' > </script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    bodyContent = $.ajax({
+        url: "ajaxCopy.html",
+        global: false,
+        type: "GET",
+        data: ({
+            id: this.getElementById('aContent')
+        }),
+        dataType: "html",
+        async: false,
+        success: function(data) {
+            //alert(data) ;
+            $("#hiddenId").append(data);
+            alert($(".aContent").text()) ;
+            document.getElementById("img").src = $(".aContent").text() ;
+        }
+
+    })
+});
+// $(function(){
+//     <!--在当前页面id为content的div元素中加载一个本地页面-->
+//     <!--页面不一定是静态的，也可以加载动态的，如index.php-->
+//     <!--后面那个是文件的地址-->
+//     $('#content').load('index.html');
+// });
+
+
+</script>
+</head> 
+<body onload="A() "> 
+	<div id="content">
+    <img  id="img" src="../image/b.jpg" />
+	</div>
+    <span id="hiddenId" style="display:none"/>
+</body> 
+</html> 
+
+
+
